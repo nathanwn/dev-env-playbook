@@ -1,0 +1,4 @@
+---
+# vars file for roles/neovim
+install_root_dir: "{{ lookup('env', 'HOME') }}/install"
+install_dir: "{{ install_root_dir }}/neovim"

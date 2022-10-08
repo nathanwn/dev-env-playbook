@@ -1,0 +1,6 @@
+---
+- hosts: localhost
+  connection: local
+  roles:
+    - role: neovim
+      nvim_version: v0.8.0

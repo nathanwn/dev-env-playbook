@@ -1,0 +1,21 @@
+---
+# handlers file for roles/neovim
+- name: Remove previous build
+  ansible.builtin.command:
+    chdir: "{{ install_dir }}"
+    cmd: |
+      make distclean
+
+- name: Configure build
+  ansible.builtin.command:
+    chdir: "{{ install_dir }}"
+    cmd: >
+      make
+      CMAKE_BUILD_TYPE=Release
+      CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=$HOME/bin/nvim"
+
+- name: Install
+  ansible.builtin.command:
+    chdir: "{{ install_dir }}"
+    cmd: |
+      make -j install
