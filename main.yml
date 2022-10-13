@@ -1,6 +1,9 @@
 ---
-- hosts: localhost
+- name: Development environment playbook.
+  hosts: localhost
+  vars_files:
+    - config.yml
   connection: local
   roles:
     - role: neovim
-      nvim_version: v0.8.0
+      nvim_version: "{{ version.neovim }}"

@@ -23,6 +23,7 @@
   ansible.builtin.file:
     path: "{{ install_root_dir }}"
     state: directory
+    mode: 0777
 
 - name: Reset git tags
   ansible.builtin.command:
