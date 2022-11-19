@@ -41,7 +41,7 @@ jobs:
       - name: Test syntax
         run: ansible-playbook main.yml --syntax-check -i inventory
 
-      - name: Test
-        run: ansible-playbook main.yml -i inventory
-        env:
-          ANSIBLE_FORCE_COLOR: '1'
+#     - name: Test
+#       run: ansible-playbook main.yml -i inventory
+#       env:
+#         ANSIBLE_FORCE_COLOR: '1'
