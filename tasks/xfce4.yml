@@ -1,0 +1,9 @@
+---
+- name: Install xfce4 packages
+  become: true
+  ansible.builtin.apt:
+    name:
+      - xfce4
+      - xfce4-goodies
+    update_cache: true
+    cache_valid_time: 3600
