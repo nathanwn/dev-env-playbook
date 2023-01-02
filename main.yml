@@ -35,7 +35,12 @@
         - neovim
 
   tasks:
-    - name: Install xfce4.
+    - name: Install Python.
+      ansible.builtin.import_tasks: "tasks/python.yml"
+      tags:
+        - python
+
+    - name: Install XFCE4.
       ansible.builtin.import_tasks: "tasks/xfce4.yml"
       tags:
         - xfce4
