@@ -4,6 +4,7 @@
   ansible.builtin.apt:
     name:
       - build-essential
+      - cmake
       - default-jdk
       - default-jre
       - exa
