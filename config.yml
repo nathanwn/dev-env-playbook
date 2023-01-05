@@ -1,3 +1,6 @@
 ---
 version:
   neovim: "v0.8.0"
+nerd_fonts:
+  - "FiraMono"
+  - "JetBrainsMono"
