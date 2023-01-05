@@ -1,0 +1,19 @@
+---
+- name: Install core packages
+  become: true
+  ansible.builtin.apt:
+    name:
+      - build-essential
+      - default-jdk
+      - default-jre
+      - exa
+      - htop
+      - fzf
+      - stow
+      - ripgrep
+      - tmux
+      - wget
+      - xclip
+      - zsh
+    update_cache: true
+    cache_valid_time: 3600

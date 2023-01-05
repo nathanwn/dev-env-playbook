@@ -35,6 +35,11 @@
         - neovim
 
   tasks:
+    - name: Install core packages.
+      ansible.builtin.import_tasks: "tasks/core.yml"
+      tags:
+        - core
+
     - name: Install Python.
       ansible.builtin.import_tasks: "tasks/python.yml"
       tags:
