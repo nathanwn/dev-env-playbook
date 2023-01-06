@@ -6,5 +6,5 @@ ignore:
 
 rules:
   line-length:
-    max: 88
+    max: 160
     level: error

@@ -1,0 +1,12 @@
+---
+- name: Download starship.
+  ansible.builtin.get_url:
+    url: "https://github.com/starship/starship/releases/download/v{{ starship.release }}/starship-x86_64-unknown-linux-gnu.tar.gz"
+    dest: "{{ lookup('env', 'HOME') }}/install"
+    mode: '0666'
+    checksum: "sha256:https://github.com/starship/starship/releases/download/v{{ starship.release }}/starship-x86_64-unknown-linux-gnu.tar.gz.sha256"
+
+- name: Extract tar.
+  ansible.builtin.unarchive:
+    src: "{{ lookup('env', 'HOME') }}/install/starship-x86_64-unknown-linux-gnu.tar.gz"
+    dest: "{{ lookup('env', 'HOME') }}/bin"

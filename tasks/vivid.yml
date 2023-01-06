@@ -1,0 +1,11 @@
+---
+- name: Download vivid.
+  ansible.builtin.get_url:
+    url: "https://github.com/sharkdp/vivid/releases/download/v{{ vivid.release }}/vivid_{{ vivid.release }}_amd64.deb"
+    dest: "{{ lookup('env', 'HOME') }}/install"
+    mode: '0666'
+
+- name: Install vivid.
+  become: true
+  ansible.builtin.apt:
+    deb: "{{ lookup('env', 'HOME') }}/install/vivid_{{ vivid.release }}_amd64.deb"

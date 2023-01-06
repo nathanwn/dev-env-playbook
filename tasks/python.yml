@@ -23,6 +23,7 @@
       - python3.10
       - python3.10-distutils
       - python3.11
+      - python3.11-dev
       - python3.11-distutils
       - pypy3
     update_cache: true

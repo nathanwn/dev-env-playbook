@@ -9,7 +9,9 @@
       - default-jre
       - exa
       - htop
+      - firefox
       - fzf
+      - perl
       - stow
       - ripgrep
       - tmux

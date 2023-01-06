@@ -4,3 +4,7 @@ version:
 nerd_fonts:
   - "FiraMono"
   - "JetBrainsMono"
+starship:
+  release: "1.12.0"
+vivid:
+  release: "0.8.0"

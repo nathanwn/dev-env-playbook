@@ -50,6 +50,16 @@
       tags:
         - python
 
+    - name: Install starship.
+      ansible.builtin.import_tasks: "tasks/starship.yml"
+      tags:
+        - starship
+
+    - name: Install vivid.
+      ansible.builtin.import_tasks: "tasks/vivid.yml"
+      tags:
+        - vivid
+
     - name: Install XFCE4.
       ansible.builtin.import_tasks: "tasks/xfce4.yml"
       tags:
