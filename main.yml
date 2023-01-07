@@ -64,3 +64,8 @@
       ansible.builtin.import_tasks: "tasks/xfce4.yml"
       tags:
         - xfce4
+
+    - name: Install zsh.
+      ansible.builtin.import_tasks: "tasks/zsh.yml"
+      tags:
+        - zsh
