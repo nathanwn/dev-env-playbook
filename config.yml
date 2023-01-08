@@ -1,6 +1,11 @@
 ---
 version:
-  neovim: "v0.8.0"
+  neovim: "v0.8.1"
+  graalvm:
+    java: 17
+    release: 22.3.0
+  go:
+    version: 1.19.3
 nerd_fonts:
   - "FiraMono"
   - "JetBrainsMono"

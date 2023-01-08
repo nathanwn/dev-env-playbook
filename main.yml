@@ -40,10 +40,20 @@
       tags:
         - core
 
+    - name: Install cargo.
+      ansible.builtin.import_tasks: "tasks/cargo.yml"
+      tags:
+        - cargo
+
     - name: Install fonts.
       ansible.builtin.import_tasks: "tasks/fonts.yml"
       tags:
         - fonts
+
+    - name: Install GraalVM.
+      ansible.builtin.import_tasks: "tasks/graalvm.yml"
+      tags:
+        - graalvm
 
     - name: Install Python.
       ansible.builtin.import_tasks: "tasks/python.yml"
