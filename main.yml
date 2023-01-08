@@ -45,6 +45,11 @@
       tags:
         - fonts
 
+    - name: Install nvim.
+      ansible.builtin.import_tasks: "tasks/nvim.yml"
+      tags:
+        - nvim
+
     - name: Install Python.
       ansible.builtin.import_tasks: "tasks/python.yml"
       tags:
