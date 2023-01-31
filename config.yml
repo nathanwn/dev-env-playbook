@@ -9,6 +9,10 @@ version:
 nerd_fonts:
   - "FiraMono"
   - "JetBrainsMono"
+python:
+  versions:
+    - semver: "3.11.1"
+      checksum: "md5:4efe92adf28875c77d3b9b2e8d3bc44a"
 starship:
   release: "1.12.0"
 vivid:

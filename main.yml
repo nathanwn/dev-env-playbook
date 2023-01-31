@@ -51,7 +51,8 @@
         - nvim
 
     - name: Install Python.
-      ansible.builtin.import_tasks: "tasks/python.yml"
+      ansible.builtin.import_role:
+        name: python
       tags:
         - python
 
