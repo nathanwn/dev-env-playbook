@@ -1,0 +1,16 @@
+---
+- name: Download cargo installer.
+  ansible.builtin.get_url:
+    url: https://sh.rustup.rs
+    dest: /tmp
+    mode: a+x
+
+- name: Install cargo.
+  ansible.builtin.command:
+    cmd: /tmp/rustup-init.sh
+    creates: "{{ lookup('env', 'HOME') }}/.cargo/bin/cargo"
+
+- name: Remove the installer.
+  ansible.builtin.file:
+    path: /tmp/rustup-init.sh
+    state: absent

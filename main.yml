@@ -56,6 +56,11 @@
       tags:
         - python
 
+    - name: Install cargo.
+      ansible.builtin.import_tasks: "tasks/cargo.yml"
+      tags:
+        - cargo
+
     - name: Install starship.
       ansible.builtin.import_tasks: "tasks/starship.yml"
       tags:
