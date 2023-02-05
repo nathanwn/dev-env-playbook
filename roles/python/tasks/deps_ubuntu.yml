@@ -1,0 +1,45 @@
+---
+- name: Install dependencies (Ubuntu).
+  become: true
+  ansible.builtin.apt:
+    name: "{{ item }}"
+  loop:
+    # From: https://github.com/deadsnakes/runbooks/blob/main/dockerfiles/Dockerfile.jammy.
+    - autoconf
+    - blt-dev
+    - build-essential
+    - bzip2
+    - debhelper
+    - devscripts
+    - dpkg-dev
+    - equivs
+    - git-buildpackage
+    - gnupg
+    - libbluetooth-dev
+    - libbz2-dev
+    - libdb-dev
+    - libexpat1-dev
+    - libffi-dev
+    - libgdbm-dev
+    - libgpm2
+    - liblzma-dev
+    - libncurses5-dev
+    - libreadline-dev
+    - libsqlite3-dev
+    - libssl-dev
+    - locales
+    - lsb-release
+    - mime-support
+    - net-tools
+    - netbase
+    - pristine-tar
+    - python3-sphinx
+    - python3
+    - quilt
+    - sharutils
+    - texinfo
+    - time
+    - tk-dev
+    - xauth
+    - xvfb
+    - zlib1g-dev

@@ -1,34 +1,11 @@
 ---
 - name: Install dependencies (Oracle Linux).
-  become: true
-  ansible.builtin.dnf:
-    name: "{{ item }}"
-  loop:
-    - autoconf
-    - bluez-libs
-    - bzip2-devel
-    - expat-devel
-    - libdb-devel
-    - libffi-devel
-    - libuuid-devel
-    - gcc
-    - gdbm-devel
-    - glibc-devel
-    - gnupg
-    - gpm-devel
-    - lcov
-    - make
-    - ncurses-devel
-    - openssl-devel
-    - pkgconfig
-    - readline-devel
-    - sqlite-devel
-    - tk-devel
-    - wget
-    - xz
-    - xz-devel
-    - zlib-devel
+  ansible.builtin.import_tasks: "deps_oraclelinux.yml"
   when: ansible_distribution == "OracleLinux"
+
+- name: Install dependencies (Ubuntu).
+  ansible.builtin.import_tasks: "deps_ubuntu.yml"
+  when: ansible_distribution == "Ubuntu"
 
 - name: Download source.
   ansible.builtin.get_url:
@@ -50,7 +27,7 @@
     creates: "/opt/python/py3{{ item.semver.split('.')[1] }}/bin/python3.{{ item.semver.split('.')[1] }}"
     chdir: "{{ lookup('env', 'HOME') }}/install/Python-{{ item.semver }}"
     cmd: |
-      "./configure --prefix=/opt/python/py3{{ item.semver.split('.')[1] }} --enable-optimizations"
+      ./configure --prefix=/opt/python/py3{{ item.semver.split('.')[1] }} --enable-optimizations
       make
       sudo make install
   loop: "{{ python.versions }}"

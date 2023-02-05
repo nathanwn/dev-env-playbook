@@ -11,6 +11,16 @@ nerd_fonts:
   - "JetBrainsMono"
 python:
   versions:
+    - semver: "3.6.15"
+      checksum: "md5:bc04aa6c2a1a172a35012abd668538cd"
+    - semver: "3.7.16"
+      checksum: "md5:df3b8ad6e2ab8f198d65ecf68816bf42"
+    - semver: "3.8.16"
+      checksum: "md5:621ac153586a3152e2ab7d3a8614df9a"
+    - semver: "3.9.16"
+      checksum: "md5:5738c204eecc375e29751cb2176fc9cc"
+    - semver: "3.10.9"
+      checksum: "md5:dc8c0f274b28ee9e95923d20cfc364c9"
     - semver: "3.11.1"
       checksum: "md5:4efe92adf28875c77d3b9b2e8d3bc44a"
 starship:
