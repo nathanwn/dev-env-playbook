@@ -30,9 +30,9 @@
 
   roles:
     - role: neovim
-      nvim_version: "{{ version.neovim }}"
+      nvim_version: "{{ nvim_nightly.release }}"
       tags:
-        - neovim
+        - nvim_nightly
 
   tasks:
     - name: Install core packages.

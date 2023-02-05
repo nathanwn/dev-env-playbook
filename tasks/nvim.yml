@@ -1,12 +1,7 @@
 ---
 - name: Download neovim.
   ansible.builtin.get_url:
-    url: "https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.deb"
-    dest: "{{ lookup('env', 'HOME') }}/install"
-    checksum: "sha256:https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.deb.sha256sum"
-    mode: '0666'
-
-- name: Install neovim.
-  become: true
-  ansible.builtin.apt:
-    deb: "{{ lookup('env', 'HOME') }}/install/nvim-linux64.deb"
+    url: "https://github.com/neovim/neovim/releases/download/{{ nvim.release }}/nvim.appimage"
+    dest: "{{ lookup('env', 'HOME') }}/bin/nvim"
+    checksum: "sha256:https://github.com/neovim/neovim/releases/download/{{ nvim.release }}/nvim.appimage.sha256sum"
+    mode: a+x

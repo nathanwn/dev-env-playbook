@@ -1,6 +1,5 @@
 ---
 version:
-  neovim: "v0.8.1"
   graalvm:
     java: 17
     release: 22.3.0
@@ -10,6 +9,10 @@ go:
 nerd_fonts:
   - "FiraMono"
   - "JetBrainsMono"
+nvim_nightly:
+  release: "nightly"
+nvim:
+  release: "v0.8.3"
 python:
   versions:
     - semver: "3.6.15"
