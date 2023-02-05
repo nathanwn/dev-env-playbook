@@ -56,6 +56,11 @@
       tags:
         - python
 
+    - name: Install Go.
+      ansible.builtin.import_tasks: "tasks/go.yml"
+      tags:
+        - go
+
     - name: Install cargo.
       ansible.builtin.import_tasks: "tasks/cargo.yml"
       tags:

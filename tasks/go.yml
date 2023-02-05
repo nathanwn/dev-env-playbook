@@ -1,0 +1,19 @@
+---
+- name: Remove current installation.
+  become: true
+  ansible.builtin.file:
+    path: /usr/local/go
+    state: absent
+
+- name: Download.
+  ansible.builtin.get_url:
+    url: "https://go.dev/dl/go{{ go.release }}.linux-amd64.tar.gz"
+    dest: "{{ lookup('env', 'HOME') }}/install/go{{ go.release }}.linux-amd64.tar.gz"
+    checksum: "{{ go.checksum }}"
+    mode: 0644
+
+- name: Extract.
+  become: true
+  ansible.builtin.unarchive:
+    src: "{{ lookup('env', 'HOME') }}/install/go{{ go.release }}.linux-amd64.tar.gz"
+    dest: "/usr/local"
