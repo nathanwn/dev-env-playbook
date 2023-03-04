@@ -5,6 +5,7 @@
     name:
       - build-essential
       - cmake
+      - curl
       - default-jdk
       - default-jre
       - exa
@@ -12,12 +13,18 @@
       - fd-find
       - firefox
       - fzf
+      - pandoc
       - perl
+      - python3-venv
+      - python3-pip
       - stow
       - ripgrep
       - tmux
+      - valgrind
       - wget
       - xclip
+      - zathura
       - zsh
     update_cache: true
     cache_valid_time: 3600
+  when: ansible_os_family == 'Debian'

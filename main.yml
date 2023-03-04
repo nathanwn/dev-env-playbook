@@ -66,10 +66,25 @@
       tags:
         - cargo
 
+    - name: Install i3.
+      ansible.builtin.import_tasks: "tasks/i3.yml"
+      tags:
+        - i3
+
     - name: Install starship.
       ansible.builtin.import_tasks: "tasks/starship.yml"
       tags:
         - starship
+
+    - name: Install terraform.
+      ansible.builtin.import_tasks: "tasks/terraform.yml"
+      tags:
+        - terraform
+
+    - name: Install texlive.
+      ansible.builtin.import_tasks: "tasks/texlive.yml"
+      tags:
+        - tex
 
     - name: Install vivid.
       ansible.builtin.import_tasks: "tasks/vivid.yml"
