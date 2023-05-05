@@ -4,8 +4,8 @@ version:
     java: 17
     release: 22.3.0
 go:
-  release: "1.20"
-  checksum: "sha256:5a9ebcc65c1cce56e0d2dc616aff4c4cedcfbda8cc6f0288cc08cda3b18dcbf1"
+  release: "1.20.2"
+  checksum: "sha256:4eaea32f59cde4dc635fbc42161031d13e1c780b87097f4b4234cfce671f1768"
 nerd_fonts:
   release: "v3.0.0"
   fonts:
