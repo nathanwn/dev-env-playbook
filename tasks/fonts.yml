@@ -18,8 +18,6 @@
     dest: "{{ lookup('env', 'HOME') }}/.fonts/{{ item }}"
     remote_src: true
   loop: "{{ nerd_fonts.fonts }}"
-  notify:
-    - Reset font cache.
 
 - name: Reset font cache.
   ansible.builtin.command:
