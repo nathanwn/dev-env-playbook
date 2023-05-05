@@ -7,8 +7,11 @@ go:
   release: "1.20"
   checksum: "sha256:5a9ebcc65c1cce56e0d2dc616aff4c4cedcfbda8cc6f0288cc08cda3b18dcbf1"
 nerd_fonts:
-  - "FiraMono"
-  - "JetBrainsMono"
+  release: "v3.0.0"
+  fonts:
+    - "CascadiaCode"
+    - "FiraMono"
+    - "JetBrainsMono"
 nvim_nightly:
   release: "nightly"
 nvim:
