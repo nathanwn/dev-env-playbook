@@ -1,11 +1,11 @@
 ---
-- name: Install terraform.
+- name: Download terraform.
   ansible.builtin.get_url:
     url: "https://releases.hashicorp.com/terraform/{{ terraform.release }}/terraform_{{ terraform.release }}_linux_amd64.zip"
     dest: "{{ lookup('env', 'HOME') }}/install/terraform.zip"
     mode: 0664
 
-- name: Extract terraform.
+- name: Extract terraform zip.
   ansible.builtin.unarchive:
     src: "{{ lookup('env', 'HOME') }}/install/terraform.zip"
     dest: "{{ lookup('env', 'HOME') }}/bin"
