@@ -100,3 +100,8 @@
       ansible.builtin.import_tasks: "tasks/zsh.yml"
       tags:
         - zsh
+
+    - name: Install kitty.
+      ansible.builtin.import_tasks: "tasks/kitty.yml"
+      tags:
+        - kitty

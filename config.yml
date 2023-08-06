@@ -6,6 +6,8 @@ version:
 go:
   release: "1.20.2"
   checksum: "sha256:4eaea32f59cde4dc635fbc42161031d13e1c780b87097f4b4234cfce671f1768"
+kitty:
+  release: "0.29.2"
 nerd_fonts:
   release: "v3.0.0"
   fonts:
