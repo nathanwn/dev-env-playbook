@@ -5,6 +5,12 @@
     dest: "{{ ansible_env.HOME }}/install"
     mode: 0644
 
+- name: Ensure kitty directory exist.
+  ansible.builtin.file:
+    path: "{{ lookup('env', 'HOME') }}/bin/kitty"
+    state: directory
+    mode: 0777
+
 - name: Extract kitty
   ansible.builtin.unarchive:
     src: "{{ ansible_env.HOME }}/install/kitty-{{ kitty.release }}-x86_64.txz"
