@@ -105,3 +105,8 @@
       ansible.builtin.import_tasks: "tasks/kitty.yml"
       tags:
         - kitty
+
+    - name: Install cue.
+      ansible.builtin.import_tasks: "tasks/cue.yml"
+      tags:
+        - cue
