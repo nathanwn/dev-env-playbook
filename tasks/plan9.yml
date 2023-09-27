@@ -1,0 +1,35 @@
+---
+- name: Install core dependencies
+  become: true
+  ansible.builtin.dnf:
+    name: "{{ item }}"
+    state: present
+    update_cache: true
+  loop:
+    - libX11-devel
+    - libXt-devel
+    - libXext-devel
+    - fontconfig-devel
+
+- name: Download plan9port.
+  ansible.builtin.git:
+    repo: https://github.com/9fans/plan9port.git
+    dest: "{{ ansible_env.HOME }}/dev/personal/plan9/plan9port"
+
+- name: Download plan9go.
+  ansible.builtin.git:
+    repo: git@github.com:nathanwn/9fans-go.git
+    dest: "{{ ansible_env.HOME }}/dev/personal/plan9/go"
+
+- name: Build plan9port.
+  ansible.builtin.shell:
+    chdir: "{{ ansible_env.HOME }}/dev/personal/plan9/plan9port"
+    cmd: |
+      ./INSTALL
+    creates: "{{ ansible_env.HOME }}/dev/personal/plan9/plan9port/bin/acme"
+
+- name: Build plan9go.
+  ansible.builtin.shell:
+    chdir: "{{ ansible_env.HOME }}/dev/personal/plan9/go"
+    cmd: "make all"
+    creates: "{{ ansible_env.HOME }}/dev/personal/plan9/go/bin/Watch"
