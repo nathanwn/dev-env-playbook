@@ -1,0 +1,7 @@
+---
+- name: Download wezterm.
+  ansible.builtin.get_url:
+    url: "https://github.com/wez/wezterm/releases/download/{{ wez.release }}/WezTerm-{{ wez.release }}-Ubuntu20.04.AppImage"
+    dest: "{{ ansible_env.HOME }}/opt/wez"
+    checksum: "sha256:https://github.com/wez/wezterm/releases/download/{{ wez.release }}/WezTerm-{{ wez.release }}-Ubuntu20.04.AppImage.sha256"
+    mode: a+x

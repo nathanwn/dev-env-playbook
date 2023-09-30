@@ -110,3 +110,8 @@
       ansible.builtin.import_tasks: "tasks/cue.yml"
       tags:
         - cue
+
+    - name: Install wez.
+      ansible.builtin.import_tasks: "tasks/wez.yml"
+      tags:
+        - wez

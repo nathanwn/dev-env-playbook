@@ -40,6 +40,8 @@ terraform:
   release: "1.4.6"
 vivid:
   release: "0.8.0"
+wez:
+  release: "20230712-072601-f4abf8fd"
 zsh:
   plugins:
     zsh_completions:
