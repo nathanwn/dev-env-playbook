@@ -1,13 +1,13 @@
 ---
 - name: Ensure fonts directory exists.
   ansible.builtin.file:
-    path: "{{ lookup('env', 'HOME') }}/.fonts"
+    path: "{{ ansible_env.HOME }}/.fonts"
     state: directory
     mode: 0777
 
 - name: Ensure directory for each font exists.
   ansible.builtin.file:
-    path: "{{ lookup('env', 'HOME') }}/.fonts/{{ item }}"
+    path: "{{ ansible_env.HOME }}/.fonts/{{ item }}"
     state: directory
     mode: 0777
   loop: "{{ nerd_fonts.fonts }}"
@@ -15,7 +15,7 @@
 - name: Install fonts.
   ansible.builtin.unarchive:
     src: "https://github.com/ryanoasis/nerd-fonts/releases/download/{{ nerd_fonts.release }}/{{ item }}.zip"
-    dest: "{{ lookup('env', 'HOME') }}/.fonts/{{ item }}"
+    dest: "{{ ansible_env.HOME }}/.fonts/{{ item }}"
     remote_src: true
   loop: "{{ nerd_fonts.fonts }}"
 

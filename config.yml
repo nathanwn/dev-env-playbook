@@ -12,10 +12,9 @@ go:
 kitty:
   release: "0.29.2"
 nerd_fonts:
-  release: "v3.0.0"
+  release: "v3.0.2"
   fonts:
-    - "CascadiaCode"
-    - "FiraMono"
+    - "ComicShannsMono"
     - "JetBrainsMono"
 nvim_nightly:
   release: "nightly"
