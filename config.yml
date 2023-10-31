@@ -21,7 +21,7 @@ nerd_fonts:
 nvim_nightly:
   release: "nightly"
 nvim:
-  release: "v0.9.2"
+  release: "v0.9.4"
 python:
   versions:
     - semver: "3.6.15"
