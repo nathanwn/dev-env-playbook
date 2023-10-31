@@ -10,22 +10,22 @@
 - name: Download source.
   ansible.builtin.get_url:
     url: "https://www.python.org/ftp/python/{{ item.semver }}/Python-{{ item.semver }}.tar.xz"
-    dest: "{{ lookup('env', 'HOME') }}/install/Python-{{ item.semver }}.tar.xz"
+    dest: "{{ ansible_env.HOME }}/install/Python-{{ item.semver }}.tar.xz"
     checksum: "{{ item.checksum }}"
     mode: 0664
   loop: "{{ python.versions }}"
 
 - name: Extract.
   ansible.builtin.unarchive:
-    src: "{{ lookup('env', 'HOME') }}/install/Python-{{ item.semver }}.tar.xz"
-    dest: "{{ lookup('env', 'HOME') }}/install/"
+    src: "{{ ansible_env.HOME }}/install/Python-{{ item.semver }}.tar.xz"
+    dest: "{{ ansible_env.HOME }}/install/"
   loop: "{{ python.versions }}"
 
 - name: Install.
   become: true
   ansible.builtin.shell:
     creates: "/opt/python/py3{{ item.semver.split('.')[1] }}/bin/python3.{{ item.semver.split('.')[1] }}"
-    chdir: "{{ lookup('env', 'HOME') }}/install/Python-{{ item.semver }}"
+    chdir: "{{ ansible_env.HOME }}/install/Python-{{ item.semver }}"
     cmd: |
       ./configure --prefix=/opt/python/py3{{ item.semver.split('.')[1] }} --enable-optimizations
       make
@@ -35,7 +35,7 @@
 - name: Symlink.
   ansible.builtin.file:
     src: "/opt/python/py3{{ item.semver.split('.')[1] }}/bin/python3.{{ item.semver.split('.')[1] }}"
-    dest: "{{ lookup('env', 'HOME') }}/bin/python3.{{ item.semver.split('.')[1] }}"
+    dest: "{{ ansible_env.HOME }}/bin/python3.{{ item.semver.split('.')[1] }}"
     mode: a+x
     state: link
   loop: "{{ python.versions }}"

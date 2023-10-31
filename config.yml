@@ -6,6 +6,8 @@ version:
 cue:
   release: "0.6.0"
   checksum: "sha256:3ae7b28e12de2e0554c28d9a9eb3dd919f0640274c925ba0e36de9079af80de2"
+delta:
+  release: "0.16.5"
 go:
   release: "1.20.2"
   checksum: "sha256:4eaea32f59cde4dc635fbc42161031d13e1c780b87097f4b4234cfce671f1768"

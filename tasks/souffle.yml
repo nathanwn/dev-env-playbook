@@ -1,0 +1,31 @@
+---
+- name: Install souffle dependencies
+  become: true
+  ansible.builtin.dnf:
+    name: "{{ item }}"
+    state: present
+    update_cache: true
+  loop:
+    - bison
+    - cmake
+    - flex
+    - gcc-c++
+    - libffi
+    - libffi-devel
+    - ncurses-devel
+    - sqlite-devel
+    - zlib-devel
+
+- name: Download souffle
+  ansible.builtin.git:
+    repo: https://github.com/souffle-lang/souffle
+    dest: "{{ ansible_env.HOME }}/dev/personal/souffle"
+    version: 2.4
+
+- name: Build souffle
+  ansible.builtin.shell:
+    cmd: |
+      cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DSOUFFLE_DOMAIN_64BIT=ON
+      cmake --build build
+    chdir: "{{ ansible_env.HOME }}/dev/personal/souffle"
+      # creates:

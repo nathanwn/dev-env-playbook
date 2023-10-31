@@ -115,3 +115,13 @@
       ansible.builtin.import_tasks: "tasks/wez.yml"
       tags:
         - wez
+
+    - name: Install souffle.
+      ansible.builtin.import_tasks: "tasks/souffle.yml"
+      tags:
+        - souffle
+
+    - name: Install delta.
+      ansible.builtin.import_tasks: "tasks/delta.yml"
+      tags:
+        - delta
