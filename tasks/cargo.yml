@@ -7,7 +7,7 @@
 
 - name: Install cargo.
   ansible.builtin.command:
-    cmd: /tmp/rustup-init.sh
+    cmd: /tmp/rustup-init.sh -y
     creates: "{{ lookup('env', 'HOME') }}/.cargo/bin/cargo"
 
 - name: Remove the installer.
