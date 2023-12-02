@@ -60,11 +60,6 @@
       tags:
         - cargo
 
-    - name: Install cargo packages.
-      ansible.builtin.import_tasks: "tasks/cargo_packages.yml"
-      tags:
-        - cargo-packages
-
     - name: Install i3.
       ansible.builtin.import_tasks: "tasks/i3.yml"
       tags:
