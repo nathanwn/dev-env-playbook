@@ -60,10 +60,10 @@
       tags:
         - cargo
 
-    - name: Install emacs
-      ansible.builtin.import_tasks: "tasks/emacs.yml"
-      tags:
-        - emacs
+    # - name: Install emacs
+    #   ansible.builtin.import_tasks: "tasks/emacs.yml"
+    #   tags:
+    #     - emacs
 
     - name: Install starship.
       ansible.builtin.import_tasks: "tasks/starship.yml"
