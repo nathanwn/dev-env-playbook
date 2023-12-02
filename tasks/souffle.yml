@@ -20,7 +20,7 @@
   ansible.builtin.git:
     repo: https://github.com/souffle-lang/souffle
     dest: "{{ ansible_env.HOME }}/dev/personal/souffle"
-    version: 2.4
+    version: "{{ souffle.version }}"
 
 - name: Build souffle
   ansible.builtin.shell:
@@ -28,4 +28,3 @@
       cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DSOUFFLE_DOMAIN_64BIT=ON
       cmake --build build
     chdir: "{{ ansible_env.HOME }}/dev/personal/souffle"
-      # creates:

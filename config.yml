@@ -40,6 +40,8 @@ python:
       checksum: "md5:dc8c0f274b28ee9e95923d20cfc364c9"
     - semver: "3.11.1"
       checksum: "md5:4efe92adf28875c77d3b9b2e8d3bc44a"
+souffle:
+  version: "2.4"
 starship:
   release: "1.12.0"
 terraform:
