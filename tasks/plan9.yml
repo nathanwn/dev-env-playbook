@@ -15,11 +15,13 @@
   ansible.builtin.git:
     repo: https://github.com/9fans/plan9port.git
     dest: "{{ ansible_env.HOME }}/dev/personal/plan9/plan9port"
+    version: 984c2824e3569479bace65bdaf9e78a2eb36dd58
 
 - name: Download plan9go.
   ansible.builtin.git:
     repo: git@github.com:nathanwn/9fans-go.git
     dest: "{{ ansible_env.HOME }}/dev/personal/plan9/go"
+    version: f2b738558ad2ba650a729339b3afa1fcad5519c2
 
 - name: Build plan9port.
   ansible.builtin.shell:
