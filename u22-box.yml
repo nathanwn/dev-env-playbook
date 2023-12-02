@@ -104,3 +104,8 @@
       ansible.builtin.import_tasks: "tasks/vivid.yml"
       tags:
         - vivid
+
+    - name: Install souffle.
+      ansible.builtin.import_tasks: "tasks/souffle.yml"
+      tags:
+        - souffle

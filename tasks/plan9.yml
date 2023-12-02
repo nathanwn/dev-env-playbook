@@ -31,7 +31,7 @@
     creates: "{{ ansible_env.HOME }}/dev/personal/plan9/plan9port/bin/acme"
 
 - name: Build plan9go.
-  ansible.builtin.shell:
+  ansible.builtin.command:
     chdir: "{{ ansible_env.HOME }}/dev/personal/plan9/go"
     cmd: "make all"
     creates: "{{ ansible_env.HOME }}/dev/personal/plan9/go/bin/Watch"

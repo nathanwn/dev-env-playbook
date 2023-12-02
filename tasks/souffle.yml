@@ -1,5 +1,5 @@
 ---
-- name: Install souffle dependencies
+- name: Souffle - Install dependencies (RedHat)
   become: true
   ansible.builtin.dnf:
     name: "{{ item }}"
@@ -15,6 +15,31 @@
     - ncurses-devel
     - sqlite-devel
     - zlib-devel
+  when: ansible_os_family == 'RedHat'
+
+- name: Install souffle dependencies (Ubuntu)
+  become: true
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+    cache_valid_time: 3600
+  loop:
+    - bison
+    - build-essential
+    - clang
+    - cmake
+    - doxygen
+    - flex
+    - g++
+    - git
+    - libffi-dev
+    - libncurses5-dev
+    - libsqlite3-dev
+    - make
+    - mcpp
+    - sqlite
+    - zlib1g-dev
+  when: ansible_os_family == 'Debian'
 
 - name: Download souffle
   ansible.builtin.git:
@@ -25,6 +50,7 @@
 - name: Build souffle
   ansible.builtin.shell:
     cmd: |
-      cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DSOUFFLE_DOMAIN_64BIT=ON
-      cmake --build build
+      cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DSOUFFLE_DOMAIN_64BIT=ON -DCMAKE_INSTALL_PREFIX=$HOME/opt/souffle
+      cmake --build build --target install
     chdir: "{{ ansible_env.HOME }}/dev/personal/souffle"
+    creates: "{{ ansible_env.HOME }}/opt/souffle/bin/souffle"
