@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Check out repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Lint
         uses: pre-commit/action@v3.0.0
@@ -39,9 +39,9 @@ jobs:
         run: pip3 install ansible
 
       - name: Test syntax
-        run: ansible-playbook main.yml --syntax-check -i inventory
+        run: ansible-playbook u22-box.yml --syntax-check -i inventory
 
-#     - name: Test
-#       run: ansible-playbook main.yml -i inventory
-#       env:
-#         ANSIBLE_FORCE_COLOR: '1'
+      - name: Integration Test
+        run: ansible-playbook u22-box.yml -i inventory
+        env:
+          ANSIBLE_FORCE_COLOR: '1'
