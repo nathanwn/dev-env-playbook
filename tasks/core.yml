@@ -8,7 +8,6 @@
       - curl
       - default-jdk
       - default-jre
-      - exa
       - htop
       - fd-find
       - firefox
