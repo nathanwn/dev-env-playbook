@@ -28,12 +28,6 @@
       tags:
         - always
 
-  roles:
-    - role: neovim
-      nvim_version: "{{ nvim_nightly.release }}"
-      tags:
-        - nvim_nightly
-
   tasks:
     - name: Install core packages.
       ansible.builtin.import_tasks: "tasks/core.yml"
@@ -65,6 +59,11 @@
       ansible.builtin.import_tasks: "tasks/cargo.yml"
       tags:
         - cargo
+
+    - name: Install cargo packages.
+      ansible.builtin.import_tasks: "tasks/cargo_packages.yml"
+      tags:
+        - cargo-packages
 
     - name: Install i3.
       ansible.builtin.import_tasks: "tasks/i3.yml"
