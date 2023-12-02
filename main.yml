@@ -21,7 +21,7 @@
       ansible.builtin.file:
         path: "{{ lookup('env', 'HOME') }}/{{ item }}"
         state: directory
-        mode: 0777
+        mode: u=rwx,g=rwx,o=rx
       loop:
         - bin
         - install

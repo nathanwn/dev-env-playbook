@@ -1,0 +1,42 @@
+---
+- name: lazygit - Remove previous installation
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - "{{ ansible_env.HOME }}/opt/delta"
+    - "/tmp/lazygit"
+    - "/tmp/lazygit_{{ lazygit.release }}_Linux_x86_64.tar.gz"
+
+- name: lazygit - Download release
+  ansible.builtin.get_url:
+    url: "https://github.com/jesseduffield/lazygit/releases/download/v{{ lazygit.release }}/lazygit_{{ lazygit.release }}_Linux_x86_64.tar.gz"
+    dest: "/tmp/lazygit_{{ lazygit.release }}_Linux_x86_64.tar.gz"
+    mode: u=rw,g=rw,o=r
+
+- name: lazygit - Create installation directory
+  ansible.builtin.file:
+    path: "/tmp/lazygit"
+    state: directory
+    mode: u=rwx,g=rwx,o=rx
+
+- name: lazygit - Extract
+  ansible.builtin.unarchive:
+    src: "/tmp/lazygit_{{ lazygit.release }}_Linux_x86_64.tar.gz"
+    dest: "/tmp/lazygit"
+    remote_src: true
+
+- name: lazygit - Move exec to opt
+  ansible.builtin.copy:
+    src: "/tmp/lazygit/lazygit"
+    dest: "{{ ansible_env.HOME }}/opt/lazygit"
+    mode: u=rwx,g=rwx,o=rx
+    remote_src: True
+
+- name: Clean up
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - "/tmp/lazygit"
+    - "/tmp/lazygit_{{ lazygit.release }}_Linux_x86_64.tar.gz"

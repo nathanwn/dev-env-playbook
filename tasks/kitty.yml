@@ -9,7 +9,7 @@
   ansible.builtin.file:
     path: "{{ lookup('env', 'HOME') }}/bin/kitty"
     state: directory
-    mode: 0777
+    mode: u=rwx,g=rwx,o=rx
 
 - name: Extract kitty
   ansible.builtin.unarchive:

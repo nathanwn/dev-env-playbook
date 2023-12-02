@@ -3,13 +3,13 @@
   ansible.builtin.file:
     path: "{{ ansible_env.HOME }}/.fonts"
     state: directory
-    mode: 0777
+    mode: u=rwx,g=rwx,o=rx
 
 - name: Ensure directory for each font exists.
   ansible.builtin.file:
     path: "{{ ansible_env.HOME }}/.fonts/{{ item }}"
     state: directory
-    mode: 0777
+    mode: u=rwx,g=rwx,o=rx
   loop: "{{ nerd_fonts.fonts }}"
 
 - name: Install fonts.

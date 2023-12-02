@@ -8,11 +8,15 @@ cue:
   checksum: "sha256:3ae7b28e12de2e0554c28d9a9eb3dd919f0640274c925ba0e36de9079af80de2"
 delta:
   release: "0.16.5"
+emacs:
+  release: "29.1"
 go:
   release: "1.20.2"
   checksum: "sha256:4eaea32f59cde4dc635fbc42161031d13e1c780b87097f4b4234cfce671f1768"
 kitty:
   release: "0.29.2"
+lazygit:
+  release: "0.40.2"
 nerd_fonts:
   release: "v3.0.2"
   fonts:
