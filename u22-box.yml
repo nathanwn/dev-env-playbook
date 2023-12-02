@@ -99,3 +99,8 @@
       ansible.builtin.import_tasks: "tasks/lazygit.yml"
       tags:
         - lazygit
+
+    - name: Install vivid.
+      ansible.builtin.import_tasks: "tasks/vivid.yml"
+      tags:
+        - vivid

@@ -1,7 +1,0 @@
----
-- name: Install packages.
-  community.general.cargo:
-    name: "{{ item }}"
-  loop:
-    - git-delta
-    - vivid
