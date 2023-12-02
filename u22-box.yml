@@ -1,0 +1,101 @@
+---
+- name: Development environment playbook.
+  hosts: localhost
+  vars_files:
+    - config.yml
+  connection: local
+
+  pre_tasks:
+    - name: Display system info.
+      ansible.builtin.debug:
+        msg: "{{ item }}"
+      loop:
+        - ansible_os_family = {{ ansible_os_family }}
+        - ansible_distribution == {{ ansible_distribution }}
+        - ansible_distribution_major_version ==
+            {{ ansible_distribution_major_version }}
+      tags:
+        - always
+
+    - name: Ensure certain directories exist.
+      ansible.builtin.file:
+        path: "{{ ansible_env.HOME }}/{{ item }}"
+        state: directory
+        mode: u=rwx,g=rwx,o=rx
+      loop:
+        - bin
+        - opt
+        - install
+      tags:
+        - always
+
+  tasks:
+    - name: Install core packages.
+      ansible.builtin.import_tasks: "tasks/core.yml"
+      tags:
+        - core
+
+    - name: Install fonts.
+      ansible.builtin.import_tasks: "tasks/fonts.yml"
+      tags:
+        - fonts
+
+    - name: Install nvim.
+      ansible.builtin.import_tasks: "tasks/nvim.yml"
+      tags:
+        - nvim
+
+    - name: Install python.
+      ansible.builtin.import_tasks: "tasks/python.yml"
+      tags:
+        - python
+
+    - name: Install Go.
+      ansible.builtin.import_tasks: "tasks/go.yml"
+      tags:
+        - go
+
+    - name: Install cargo.
+      ansible.builtin.import_tasks: "tasks/cargo.yml"
+      tags:
+        - cargo
+
+    - name: Install emacs
+      ansible.builtin.import_tasks: "tasks/emacs.yml"
+      tags:
+        - emacs
+
+    - name: Install starship.
+      ansible.builtin.import_tasks: "tasks/starship.yml"
+      tags:
+        - starship
+
+    - name: Install texlive.
+      ansible.builtin.import_tasks: "tasks/texlive.yml"
+      tags:
+        - tex
+
+    - name: Install zsh.
+      ansible.builtin.import_tasks: "tasks/zsh.yml"
+      tags:
+        - zsh
+
+    - name: Install cue.
+      ansible.builtin.import_tasks: "tasks/cue.yml"
+      tags:
+        - cue
+
+    - name: Install wez.
+      ansible.builtin.import_tasks: "tasks/wez.yml"
+      tags:
+        - wez
+
+    - name: Install delta.
+      ansible.builtin.import_tasks: "tasks/delta.yml"
+      tags:
+        - delta
+
+    - name: Install lazygit.
+      ansible.builtin.import_tasks: "tasks/lazygit.yml"
+      tags:
+        - lazygit
