@@ -31,7 +31,7 @@
     src: "/tmp/delta/delta-{{ delta.release }}-x86_64-unknown-linux-gnu/delta"
     dest: "{{ ansible_env.HOME }}/opt/delta"
     mode: u=rwx,g=rwx,o=rx
-    remote_src: True
+    remote_src: true
 
 - name: Delta - Clean up
   ansible.builtin.file:

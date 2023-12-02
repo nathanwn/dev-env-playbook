@@ -31,7 +31,7 @@
     src: "/tmp/lazygit/lazygit"
     dest: "{{ ansible_env.HOME }}/opt/lazygit"
     mode: u=rwx,g=rwx,o=rx
-    remote_src: True
+    remote_src: true
 
 - name: Clean up
   ansible.builtin.file:

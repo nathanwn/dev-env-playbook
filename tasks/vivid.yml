@@ -22,7 +22,7 @@
     src: "/tmp/vivid/vivid-v{{ vivid.release }}-x86_64-unknown-linux-gnu/vivid"
     dest: "{{ ansible_env.HOME }}/opt/vivid"
     mode: u=rwx,g=rwx,o=rx
-    remote_src: True
+    remote_src: true
 
 - name: Vivid - Clean up
   ansible.builtin.file:
