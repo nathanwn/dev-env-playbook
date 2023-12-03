@@ -1,0 +1,31 @@
+- name: Emacs - Install deps
+  become: true
+  ansible.builtin.apt:
+    name:
+      - libgif-dev
+      - libgnutls28-dev
+      - libgtk-3-dev
+      - libncurses-dev
+      - libxpm-dev
+  when: ansible_os_family == 'Debian'
+
+- name: Emacs - Download
+  ansible.builtin.get_url:
+    url: "https://ftp.gnu.org/gnu/emacs/emacs-{{ emacs.release }}.tar.xz"
+    dest: "{{ ansible_env.HOME }}/install/emacs-{{ emacs.release }}.tar.xz"
+    mode: 0644
+
+- name: Emacs - Extract
+  ansible.builtin.unarchive:
+    src: "{{ ansible_env.HOME }}/install/emacs-{{ emacs.release }}.tar.xz"
+    dest: "{{ ansible_env.HOME }}/install"
+    remote_src: true  # source is on the machine being set up
+
+- name: Emacs - Build
+  ansible.builtin.shell:
+    chdir: "{{ ansible_env.HOME }}/install/emacs-{{ emacs.release }}"
+    cmd: |
+      ./configure
+      make
+      make install prefix=$HOME/opt/emacs
+    creates: "{{ ansible_env.HOME }}/opt/emacs"

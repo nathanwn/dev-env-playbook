@@ -109,3 +109,8 @@
       ansible.builtin.import_tasks: "tasks/souffle.yml"
       tags:
         - souffle
+
+    - name: Install emacs.
+      ansible.builtin.import_tasks: "tasks/emacs.yml"
+      tags:
+        - emacs
