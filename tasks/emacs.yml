@@ -1,3 +1,4 @@
+---
 - name: Emacs - Install deps
   become: true
   ansible.builtin.apt:
