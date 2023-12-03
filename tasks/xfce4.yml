@@ -5,5 +5,4 @@
     name:
       - xfce4
       - xfce4-goodies
-    update_cache: true
     cache_valid_time: 3600

@@ -5,5 +5,4 @@
     name:
       - i3-wm
       - i3blocks
-    update_cache: true
     cache_valid_time: 3600
