@@ -49,7 +49,7 @@ terraform:
 vivid:
   release: "0.9.0"
 wez:
-  release: "20230712-072601-f4abf8fd"
+  release: "20240128-202157-1e552d76"
 zsh:
   plugins:
     zsh_completions:
