@@ -53,8 +53,10 @@ wez:
 zsh:
   plugins:
     zsh_completions:
-      release: "0.34.0"
+      release: "0.35.0"
     zsh_autosuggestions:
       release: "v0.7.0"
     zsh_syntax_highlighting:
-      release: "0.7.1"
+      release: "0.8.0"
+    powerlevel10k:
+      release: "v1.19.0"
