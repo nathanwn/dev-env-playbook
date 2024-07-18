@@ -11,12 +11,12 @@ delta:
 emacs:
   release: "29.1"
 go:
-  release: "1.20.2"
-  checksum: "sha256:4eaea32f59cde4dc635fbc42161031d13e1c780b87097f4b4234cfce671f1768"
+  release: "1.22.3"
+  checksum: "sha256:8920ea521bad8f6b7bc377b4824982e011c19af27df88a815e3586ea895f1b36"
 kitty:
   release: "0.29.2"
 lazygit:
-  release: "0.40.2"
+  release: "0.43.1"
 nerd_fonts:
   release: "v3.0.2"
   fonts:
