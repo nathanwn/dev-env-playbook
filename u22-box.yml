@@ -60,11 +60,6 @@
       tags:
         - cargo
 
-    # - name: Install emacs
-    #   ansible.builtin.import_tasks: "tasks/emacs.yml"
-    #   tags:
-    #     - emacs
-
     - name: Install starship.
       ansible.builtin.import_tasks: "tasks/starship.yml"
       tags:
@@ -84,6 +79,11 @@
       ansible.builtin.import_tasks: "tasks/cue.yml"
       tags:
         - cue
+
+    - name: Install hyperfine.
+      ansible.builtin.import_tasks: "tasks/hyperfine.yml"
+      tags:
+        - hyperfine
 
     - name: Install wez.
       ansible.builtin.import_tasks: "tasks/wez.yml"
@@ -109,8 +109,3 @@
       ansible.builtin.import_tasks: "tasks/souffle.yml"
       tags:
         - souffle
-
-    - name: Install emacs.
-      ansible.builtin.import_tasks: "tasks/emacs.yml"
-      tags:
-        - emacs

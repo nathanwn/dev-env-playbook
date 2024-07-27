@@ -4,7 +4,7 @@
     path: "{{ item }}"
     state: absent
   loop:
-    - "{{ ansible_env.HOME }}/opt/delta"
+    - "{{ ansible_env.HOME }}/opt/lazygit"
     - "/tmp/lazygit"
     - "/tmp/lazygit_{{ lazygit.release }}_Linux_x86_64.tar.gz"
 

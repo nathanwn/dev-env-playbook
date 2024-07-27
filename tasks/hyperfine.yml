@@ -1,0 +1,53 @@
+---
+- name: Hyperfine - Remove previous installation
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - "{{ ansible_env.HOME }}/opt/hyperfine"
+    - "/tmp/hyperfine"
+    - "/tmp/hyperfine-x86_64-unknown-linux-gnu.tar.gz"
+
+- name: Hyperfine - Download release
+  ansible.builtin.get_url:
+    url: "https://github.com/sharkdp/hyperfine/releases/download/{{ hyperfine.release }}/hyperfine-{{ hyperfine.release }}-x86_64-unknown-linux-gnu.tar.gz"
+    dest: "/tmp/hyperfine-x86_64-unknown-linux-gnu.tar.gz"
+    mode: u=rw,g=rw,o=r
+
+- name: Hyperfine - Create installation directory
+  ansible.builtin.file:
+    path: "/tmp/hyperfine"
+    state: directory
+    mode: u=rwx,g=rwx,o=rx
+
+- name: Hyperfine - Extract
+  ansible.builtin.unarchive:
+    src: "/tmp/hyperfine-x86_64-unknown-linux-gnu.tar.gz"
+    dest: "/tmp/hyperfine"
+    remote_src: true
+
+- name: Hyperfine - Move installation to opt
+  ansible.builtin.copy:
+    src: "/tmp/hyperfine/hyperfine-{{ hyperfine.release }}-x86_64-unknown-linux-gnu"
+    dest: "{{ ansible_env.HOME }}/opt"
+    mode: u=rwx,g=rwx,o=rx
+    remote_src: true
+
+- name: Clean up
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - "/tmp/hyperfine"
+    - "/tmp/hyperfine-x86_64-unknown-linux-gnu.tar.gz"
+
+- name: Ensure ansible zsh file exists.
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.config/zsh/ansible.zsh"
+    state: touch
+
+- name: Add hyperfine to PATH
+  ansible.builtin.blockinfile:
+    path: "{{ ansible_env.HOME }}/.config/zsh/ansible.zsh"
+    block: |
+      export PATH="$PATH:$HOME/opt/hyperfine-{{ hyperfine.release }}-x86_64-unknown-linux-gnu"
