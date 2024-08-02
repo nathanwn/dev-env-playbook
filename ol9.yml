@@ -37,40 +37,54 @@
         - always
 
   tasks:
+    - name: Install EPEL repo
+      become: true
+      ansible.builtin.dnf:
+        name: oracle-epel-release-el9
+        state: present
+        update_cache: false
+      tags:
+        - epel
+
     - name: Install core dependencies
       become: true
       ansible.builtin.dnf:
         name: "{{ item }}"
         state: present
-        update_cache: true
+        update_cache: false
       loop:
+        - cmake
+        - fd-find
+        - fuse
+        - fzf
         - gcc
         - gcc-c++
         - git
+        - git-delta
         - htop
-        - java-17-openjdk-devel
+        - hyperfine
+        - jq
         - make
         - man
         - man-pages
-        - netcat
-        - podman
-        - podman-docker
+        - ncurses
         - python3
         - python3.11
+        - ripgrep
         - stow
+        - tldr
         - tmux
+        - tokei
         - tree
+        - unzip
+        - zip
         - zsh
+        - zsh-autosuggestions
+        - zsh-syntax-highlighting
+      tags:
+        - core
 
     - name: Install nvim
       ansible.builtin.import_tasks: "tasks/nvim.yml"
       tags:
         - nvim
-
-    - name: Install sdkman
-      ansible.builtin.shell:
-        cmd: |
-          curl -s "https://get.sdkman.io" | bash
-        creates: "{{ ansible_env.HOME }}/.sdkman/bin/sdkman-init.sh"
-      tags:
-        - sdkman
