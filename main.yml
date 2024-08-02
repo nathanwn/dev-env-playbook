@@ -71,6 +71,11 @@
       tags:
         - starship
 
+    - name: Install direnv.
+      ansible.builtin.import_tasks: "tasks/direnv.yml"
+      tags:
+        - direnv
+
     - name: Install terraform.
       ansible.builtin.import_tasks: "tasks/terraform.yml"
       tags:

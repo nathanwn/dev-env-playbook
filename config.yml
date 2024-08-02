@@ -8,6 +8,8 @@ cue:
   checksum: "sha256:3ae7b28e12de2e0554c28d9a9eb3dd919f0640274c925ba0e36de9079af80de2"
 delta:
   release: "0.16.5"
+direnv:
+  release: "v2.34.0"
 go:
   release: "1.22.3"
   checksum: "sha256:8920ea521bad8f6b7bc377b4824982e011c19af27df88a815e3586ea895f1b36"
