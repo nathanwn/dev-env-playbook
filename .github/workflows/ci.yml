@@ -1,3 +1,4 @@
+---
 name: CI
 
 on:
@@ -11,37 +12,46 @@ on:
 jobs:
   lint:
     name: Lint
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Check out repo
         uses: actions/checkout@v4
 
-      - name: Lint
-        uses: pre-commit/action@v3.0.0
+      - name: Install python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - run: |
+          python -m pip install pre-commit
+          pre-commit run --all-files
 
   integration:
     name: Integration Test
     strategy:
       matrix:
         os:
-          - ubuntu-22.04
+          - ubuntu-24.04
     runs-on: ${{ matrix.os }}
     steps:
       - name: Check out repo
         uses: actions/checkout@v3
 
       - name: Install python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: '3.12'
 
       - name: Install ansible
         run: pip3 install ansible
 
-      - name: Test syntax
-        run: ansible-playbook u22-box.yml --syntax-check -i inventory
+      - name: Setup playbook
+        run: |
+          cp inventory.ini.example inventory.ini
+          cp env.yml.example env.yml
 
       - name: Integration Test
-        run: ansible-playbook u22-box.yml -i inventory
+        run: >
+          ansible-playbook -i inventory.ini -l local -e "integration_testing=true" ubuntu24.yml
         env:
           ANSIBLE_FORCE_COLOR: '1'

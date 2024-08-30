@@ -1,0 +1,33 @@
+---
+- name: Remove current installation
+  become: true
+  ansible.builtin.file:
+    path: /usr/local/go
+    state: absent
+
+- name: Download
+  ansible.builtin.get_url:
+    url: "https://go.dev/dl/go{{ go.release }}.linux-amd64.tar.gz"
+    dest: "/tmp/go{{ go.release }}.linux-amd64.tar.gz"
+    checksum: "{{ go.checksum }}"
+    mode: u=rw,g=r,o=r
+
+- name: Extract
+  become: true
+  ansible.builtin.unarchive:
+    src: "/tmp/go{{ go.release }}.linux-amd64.tar.gz"
+    dest: "/usr/local"
+    remote_src: true  # source is on the machine being set up
+
+- name: Remove tar
+  ansible.builtin.file:
+    path: "/tmp/go{{ go.release }}.linux-amd64.tar.gz"
+    state: absent
+
+- name: Add go to PATH
+  ansible.builtin.blockinfile:
+    path: "{{ ansible_env.HOME }}/.config/zsh/ansible.zsh"
+    marker: "# {mark} GO"
+    block: |
+      export PATH="/usr/local/go/bin:$PATH"
+      export PATH="$(go env GOPATH)/bin:$PATH"

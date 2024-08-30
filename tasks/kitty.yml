@@ -3,11 +3,11 @@
   ansible.builtin.get_url:
     url: "https://github.com/kovidgoyal/kitty/releases/download/v{{ kitty.release }}/kitty-{{ kitty.release }}-x86_64.txz"
     dest: "{{ ansible_env.HOME }}/install"
-    mode: 0644
+    mode: u=rw,g=rw,o=r
 
 - name: Ensure kitty directory exist.
   ansible.builtin.file:
-    path: "{{ lookup('env', 'HOME') }}/bin/kitty"
+    path: "{{ ansible_env.HOME }}/bin/kitty"
     state: directory
     mode: u=rwx,g=rwx,o=rx
 

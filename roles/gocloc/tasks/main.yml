@@ -1,0 +1,42 @@
+---
+- name: Remove previous installation
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - "{{ ansible_env.HOME }}/opt/gocloc"
+    - "/tmp/gocloc"
+    - "/tmp/gocloc.tar.gz"
+
+- name: Download release
+  ansible.builtin.get_url:
+    url: "https://github.com/hhatto/gocloc/releases/download/v{{ gocloc.release }}/gocloc_Linux_x86_64.tar.gz"
+    dest: "/tmp/gocloc.tar.gz"
+    mode: u=rw,g=rw,o=r
+
+- name: Create installation directory
+  ansible.builtin.file:
+    path: "/tmp/gocloc"
+    state: directory
+    mode: u=rwx,g=rwx,o=rx
+
+- name: Extract
+  ansible.builtin.unarchive:
+    src: "/tmp/gocloc.tar.gz"
+    dest: "/tmp/gocloc"
+    remote_src: true
+
+- name: Move exec to opt
+  ansible.builtin.copy:
+    src: "/tmp/gocloc/gocloc"
+    dest: "{{ ansible_env.HOME }}/opt/"
+    mode: u=rwx,g=rwx,o=rx
+    remote_src: true
+
+- name: Clean up
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - "/tmp/gocloc.tar.gz"
+    - "/tmp/gocloc"

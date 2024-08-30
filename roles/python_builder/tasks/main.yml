@@ -1,0 +1,41 @@
+---
+- name: Install dependencies (Oracle Linux).
+  ansible.builtin.import_tasks: "deps_oraclelinux.yml"
+  when: ansible_distribution == "OracleLinux"
+
+- name: Install dependencies (Ubuntu).
+  ansible.builtin.import_tasks: "deps_ubuntu.yml"
+  when: ansible_distribution == "Ubuntu"
+
+- name: Download source.
+  ansible.builtin.get_url:
+    url: "https://www.python.org/ftp/python/{{ item.semver }}/Python-{{ item.semver }}.tar.xz"
+    dest: "{{ ansible_env.HOME }}/install/Python-{{ item.semver }}.tar.xz"
+    checksum: "{{ item.checksum }}"
+    mode: u=rw,g=rw,o=r
+  loop: "{{ python.versions }}"
+
+- name: Extract.
+  ansible.builtin.unarchive:
+    src: "{{ ansible_env.HOME }}/install/Python-{{ item.semver }}.tar.xz"
+    dest: "{{ ansible_env.HOME }}/install/"
+  loop: "{{ python.versions }}"
+
+- name: Install.
+  become: true
+  ansible.builtin.shell:
+    creates: "/opt/python/py3{{ item.semver.split('.')[1] }}/bin/python3.{{ item.semver.split('.')[1] }}"
+    chdir: "{{ ansible_env.HOME }}/install/Python-{{ item.semver }}"
+    cmd: |
+      ./configure --prefix=/opt/python/py3{{ item.semver.split('.')[1] }} --enable-optimizations
+      make
+      sudo make install
+  loop: "{{ python.versions }}"
+
+- name: Symlink.
+  ansible.builtin.file:
+    src: "/opt/python/py3{{ item.semver.split('.')[1] }}/bin/python3.{{ item.semver.split('.')[1] }}"
+    dest: "{{ ansible_env.HOME }}/bin/python3.{{ item.semver.split('.')[1] }}"
+    mode: a+x
+    state: link
+  loop: "{{ python.versions }}"

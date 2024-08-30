@@ -1,41 +1,32 @@
 ---
-- name: Install dependencies (Oracle Linux).
-  ansible.builtin.import_tasks: "deps_oraclelinux.yml"
-  when: ansible_distribution == "OracleLinux"
-
-- name: Install dependencies (Ubuntu).
-  ansible.builtin.import_tasks: "deps_ubuntu.yml"
-  when: ansible_distribution == "Ubuntu"
-
-- name: Download source.
-  ansible.builtin.get_url:
-    url: "https://www.python.org/ftp/python/{{ item.semver }}/Python-{{ item.semver }}.tar.xz"
-    dest: "{{ ansible_env.HOME }}/install/Python-{{ item.semver }}.tar.xz"
-    checksum: "{{ item.checksum }}"
-    mode: 0664
-  loop: "{{ python.versions }}"
-
-- name: Extract.
-  ansible.builtin.unarchive:
-    src: "{{ ansible_env.HOME }}/install/Python-{{ item.semver }}.tar.xz"
-    dest: "{{ ansible_env.HOME }}/install/"
-  loop: "{{ python.versions }}"
-
-- name: Install.
+- name: Add deadsnakes repository.
   become: true
-  ansible.builtin.shell:
-    creates: "/opt/python/py3{{ item.semver.split('.')[1] }}/bin/python3.{{ item.semver.split('.')[1] }}"
-    chdir: "{{ ansible_env.HOME }}/install/Python-{{ item.semver }}"
-    cmd: |
-      ./configure --prefix=/opt/python/py3{{ item.semver.split('.')[1] }} --enable-optimizations
-      make
-      sudo make install
-  loop: "{{ python.versions }}"
+  ansible.builtin.apt_repository:
+    repo: "ppa:deadsnakes/ppa"
 
-- name: Symlink.
-  ansible.builtin.file:
-    src: "/opt/python/py3{{ item.semver.split('.')[1] }}/bin/python3.{{ item.semver.split('.')[1] }}"
-    dest: "{{ ansible_env.HOME }}/bin/python3.{{ item.semver.split('.')[1] }}"
-    mode: a+x
-    state: link
-  loop: "{{ python.versions }}"
+- name: Add pypi repository.
+  become: true
+  ansible.builtin.apt_repository:
+    repo: "ppa:pypy/ppa"
+
+- name: Install all Python versions that I need.
+  become: true
+  ansible.builtin.apt:
+    name:
+      - python3.9
+      - python3.9-venv
+      - python3.9-dev
+      # - python3.9-distutils
+      - python3.10
+      - python3.10-venv
+      - python3.10-dev
+      # - python3.10-distutils
+      - python3.11
+      - python3.11-venv
+      - python3.11-dev
+      # - python3.11-distutils
+      - python3.12
+      - python3.12-venv
+      - python3.12-dev
+      - pypy3
+    cache_valid_time: 3600

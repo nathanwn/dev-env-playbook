@@ -1,0 +1,42 @@
+---
+- name: Remove previous installation
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - "{{ ansible_env.HOME }}/opt/starship"
+    - "/tmp/starship"
+    - "/tmp/starship-x86_64-unknown-linux-gnu.tar.gz"
+
+- name: Download release
+  ansible.builtin.get_url:
+    url: "https://github.com/starship/starship/releases/download/{{ starship.release }}/starship-x86_64-unknown-linux-gnu.tar.gz"
+    dest: "/tmp/starship-x86_64-unknown-linux-gnu.tar.gz"
+    mode: u=rw,g=rw,o=r
+
+- name: Create installation directory
+  ansible.builtin.file:
+    path: "/tmp/starship"
+    state: directory
+    mode: u=rwx,g=rwx,o=rx
+
+- name: Extract
+  ansible.builtin.unarchive:
+    src: "/tmp/starship-x86_64-unknown-linux-gnu.tar.gz"
+    dest: "/tmp/starship"
+    remote_src: true
+
+- name: Move exec to opt
+  ansible.builtin.copy:
+    src: "/tmp/starship/starship"
+    dest: "{{ ansible_env.HOME }}/opt/"
+    mode: u=rwx,g=rwx,o=rx
+    remote_src: true
+
+- name: Clean up
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - "/tmp/starship-x86_64-unknown-linux-gnu.tar.gz"
+    - "/tmp/starship"

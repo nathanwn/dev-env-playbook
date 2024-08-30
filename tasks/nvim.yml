@@ -1,7 +1,0 @@
----
-- name: Download neovim.
-  ansible.builtin.get_url:
-    url: "https://github.com/neovim/neovim/releases/download/{{ nvim.release }}/nvim.appimage"
-    dest: "{{ ansible_env.HOME }}/opt/nvim"
-    checksum: "sha256:https://github.com/neovim/neovim/releases/download/{{ nvim.release }}/nvim.appimage.sha256sum"
-    mode: a+x

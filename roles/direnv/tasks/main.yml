@@ -1,0 +1,6 @@
+---
+- name: Download
+  ansible.builtin.get_url:
+    url: "https://github.com/direnv/direnv/releases/download/{{ direnv.release }}/direnv.linux-amd64"
+    dest: "{{ ansible_env.HOME }}/opt/direnv"
+    mode: u=rwx,g=rwx,o=rx

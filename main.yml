@@ -3,7 +3,6 @@
   hosts: localhost
   vars_files:
     - config.yml
-  connection: local
 
   pre_tasks:
     - name: Display system info.
@@ -12,12 +11,10 @@
       loop:
         - ansible_os_family = {{ ansible_os_family }}
         - ansible_distribution == {{ ansible_distribution }}
-        - ansible_distribution_major_version ==
-            {{ ansible_distribution_major_version }}
+        - ansible_distribution_major_version == {{ ansible_distribution_major_version }}
         - ansible_architecture == {{ ansible_architecture }}
       tags:
         - always
-
     - name: Ensure certain directories exist.
       ansible.builtin.file:
         path: "{{ lookup('env', 'HOME') }}/{{ item }}"
@@ -35,26 +32,11 @@
       tags:
         - core
 
-    - name: Install fonts.
-      ansible.builtin.import_tasks: "tasks/fonts.yml"
-      tags:
-        - fonts
-
-    - name: Install nvim.
-      ansible.builtin.import_tasks: "tasks/nvim.yml"
-      tags:
-        - nvim
-
     - name: Install Python.
       ansible.builtin.import_role:
         name: python
       tags:
         - python
-
-    - name: Install Go.
-      ansible.builtin.import_tasks: "tasks/go.yml"
-      tags:
-        - go
 
     - name: Install cargo.
       ansible.builtin.import_tasks: "tasks/cargo.yml"
@@ -66,62 +48,22 @@
       tags:
         - i3
 
-    - name: Install starship.
-      ansible.builtin.import_tasks: "tasks/starship.yml"
-      tags:
-        - starship
-
-    - name: Install direnv.
-      ansible.builtin.import_tasks: "tasks/direnv.yml"
-      tags:
-        - direnv
-
-    - name: Install terraform.
-      ansible.builtin.import_tasks: "tasks/terraform.yml"
-      tags:
-        - terraform
-
     - name: Install texlive.
       ansible.builtin.import_tasks: "tasks/texlive.yml"
       tags:
         - tex
-
-    - name: Install vivid.
-      ansible.builtin.import_tasks: "tasks/vivid.yml"
-      tags:
-        - vivid
 
     - name: Install XFCE4.
       ansible.builtin.import_tasks: "tasks/xfce4.yml"
       tags:
         - xfce4
 
-    - name: Install zsh.
-      ansible.builtin.import_tasks: "tasks/zsh.yml"
-      tags:
-        - zsh
-
     - name: Install kitty.
       ansible.builtin.import_tasks: "tasks/kitty.yml"
       tags:
         - kitty
 
-    - name: Install cue.
-      ansible.builtin.import_tasks: "tasks/cue.yml"
-      tags:
-        - cue
-
-    - name: Install wez.
-      ansible.builtin.import_tasks: "tasks/wez.yml"
-      tags:
-        - wez
-
     - name: Install souffle.
       ansible.builtin.import_tasks: "tasks/souffle.yml"
       tags:
         - souffle
-
-    - name: Install delta.
-      ansible.builtin.import_tasks: "tasks/delta.yml"
-      tags:
-        - delta

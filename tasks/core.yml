@@ -14,8 +14,8 @@
       - fzf
       - pandoc
       - perl
-      # - podman
-      # - podman-docker
+      - podman
+      - podman-docker
       - python3-venv
       - python3-pip
       - stow
@@ -24,7 +24,6 @@
       - valgrind
       - wget
       - xclip
-      - zathura
       - zsh
     cache_valid_time: 3600
   when: ansible_os_family == 'Debian'

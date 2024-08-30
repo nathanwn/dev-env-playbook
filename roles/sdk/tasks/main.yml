@@ -1,0 +1,39 @@
+---
+- name: Install prerequisites.
+  become: true
+  ansible.builtin.apt:
+    name:
+      - zip
+      - unzip
+
+- name: Download install script
+  ansible.builtin.get_url:
+    url: "https://get.sdkman.io?rcupdate=false"
+    dest: "{{ ansible_env.HOME }}/install/get-sdkman.sh"
+    mode: a+x
+
+- name: Run install script
+  ansible.builtin.command:
+    chdir: "{{ ansible_env.HOME }}/install"
+    cmd: "./get-sdkman.sh"
+    creates: "{{ ansible_env.HOME }}/.sdkman/bin/sdkman-init.sh"
+
+- name: Disable prompt
+  ansible.builtin.replace:
+    path: "{{ ansible_env.HOME }}/.sdkman/etc/config"
+    regexp: '^(sdkman_auto_answer=)\S+$'
+    replace: '\1true'
+
+- name: Disable prompt
+  ansible.builtin.replace:
+    path: "{{ ansible_env.HOME }}/.sdkman/etc/config"
+    regexp: '^(sdkman_auto_answer=)\S+$'
+    replace: '\1true'
+
+- name: Enable command
+  ansible.builtin.blockinfile:
+    path: "{{ ansible_env.HOME }}/.config/zsh/ansible.zsh"
+    marker: "# {mark} SDK"
+    block: |
+      export SDKMAN_DIR="$HOME/.sdkman"
+      [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"

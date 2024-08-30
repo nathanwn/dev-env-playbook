@@ -1,3 +1,5 @@
 .venv
 
 vars_private.yml
+env.yml
+inventory.ini

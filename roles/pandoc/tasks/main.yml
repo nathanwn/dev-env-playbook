@@ -1,0 +1,42 @@
+---
+- name: Remove previous installation
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - "{{ ansible_env.HOME }}/opt/pandoc"
+    - "/tmp/pandoc"
+    - "/tmp/pandoc-x86_64-unknown-linux-gnu.tar.gz"
+
+- name: Download release
+  ansible.builtin.get_url:
+    url: "https://github.com/jgm/pandoc/releases/download/{{ pandoc.release }}/pandoc-{{ pandoc.release }}-linux-amd64.tar.gz"
+    dest: "/tmp/pandoc.tar.gz"
+    mode: u=rw,g=rw,o=r
+
+- name: Create installation directory
+  ansible.builtin.file:
+    path: "/tmp/pandoc"
+    state: directory
+    mode: u=rwx,g=rwx,o=rx
+
+- name: Extract
+  ansible.builtin.unarchive:
+    src: "/tmp/pandoc.tar.gz"
+    dest: "/tmp/pandoc"
+    remote_src: true
+
+- name: Move exec to opt
+  ansible.builtin.copy:
+    src: "/tmp/pandoc/pandoc-{{ pandoc.release }}"
+    dest: "{{ ansible_env.HOME }}/opt/"
+    mode: u=rwx,g=rwx,o=rx
+    remote_src: true
+
+- name: Clean up
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - "/tmp/pandoc-x86_64-unknown-linux-gnu.tar.gz"
+    - "/tmp/pandoc"

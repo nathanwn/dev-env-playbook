@@ -1,0 +1,6 @@
+---
+- name: Add flathub.
+  ansible.builtin.shell:
+    cmd: |
+      flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+    creates: "{{ ansible_env.HOME }}/.local/share/flatpak/repo/flathub.trustedkeys.gpg"

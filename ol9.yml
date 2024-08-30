@@ -3,7 +3,6 @@
   hosts: localhost
   vars_files:
     - config.yml
-
   pre_tasks:
     - name: Display system info.
       ansible.builtin.debug:
@@ -11,11 +10,9 @@
       loop:
         - ansible_os_family = {{ ansible_os_family }}
         - ansible_distribution == {{ ansible_distribution }}
-        - ansible_distribution_major_version ==
-            {{ ansible_distribution_major_version }}
+        - ansible_distribution_major_version == {{ ansible_distribution_major_version }}
       tags:
         - always
-
     - name: Debug
       ansible.builtin.debug:
         var: "{{ item }}"
@@ -24,7 +21,6 @@
         - ansible_env.USER
       tags:
         - debug
-
     - name: Ensure certain directories exist.
       ansible.builtin.file:
         path: "{{ ansible_env.HOME }}/{{ item }}"
@@ -35,7 +31,6 @@
         - dev/personal
       tags:
         - always
-
   tasks:
     - name: Install EPEL repo
       become: true
@@ -45,7 +40,6 @@
         update_cache: false
       tags:
         - epel
-
     - name: Install core dependencies
       become: true
       ansible.builtin.dnf:
@@ -53,8 +47,10 @@
         state: present
         update_cache: false
       loop:
+        - bzip2
         - cmake
         - fd-find
+        - flatpak
         - fuse
         - fzf
         - gcc
@@ -68,6 +64,8 @@
         - man
         - man-pages
         - ncurses
+        - podman
+        - podman-docker
         - python3
         - python3.11
         - ripgrep
@@ -77,14 +75,15 @@
         - tokei
         - tree
         - unzip
+        - xclip
+        - xz
         - zip
         - zsh
         - zsh-autosuggestions
         - zsh-syntax-highlighting
       tags:
         - core
-
-    - name: Install nvim
-      ansible.builtin.import_tasks: "tasks/nvim.yml"
+    - name: Install flatpak
+      ansible.builtin.import_tasks: "tasks/flatpak.yml"
       tags:
-        - nvim
+        - flatpak

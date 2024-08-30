@@ -1,0 +1,10 @@
+# Example: ansible-playbook -i inventory.ini u24-box.yml --limit u24_box
+
+[all:vars]
+ansible_python_interpreter=auto_silent
+
+[local]
+localhost ansible_connection=local
+
+[u24_box]
+vbox ansible_host=127.0.0.1 ansible_port=12345 ansible_user=nathan ansible_ssh_private_key_file=~/.ssh/id_ed25519

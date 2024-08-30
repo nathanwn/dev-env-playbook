@@ -1,0 +1,20 @@
+---
+- name: Ensure certain directories exist.
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/{{ item }}"
+    state: directory
+    mode: u=rwx,g=rwx,o=rx
+  loop:
+    - bin
+    - opt
+    - install
+    - .config
+    - .config/zsh
+
+- name: Ensure certain files exist.
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/{{ item }}"
+    state: touch
+    mode: u=rw,g=r,o=r
+  loop:
+    - .config/zsh/ansible.zsh

@@ -1,18 +1,14 @@
 ---
-# See https://pre-commit.com for more information
-# See https://pre-commit.com/hooks.html for more hooks
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.4.0
+    rev: v4.6.0
     hooks:
       - id: check-yaml
-
-  - repo: https://github.com/adrienverge/yamllint
-    rev: v1.32.0
+  - repo: https://github.com/google/yamlfmt
+    rev: v0.13.0
     hooks:
-      - id: yamllint
-
+      - id: yamlfmt
   - repo: https://github.com/ansible-community/ansible-lint
-    rev: v6.17.0
+    rev: v24.7.0
     hooks:
       - id: ansible-lint

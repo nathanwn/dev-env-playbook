@@ -1,0 +1,32 @@
+---
+- name: Install packages
+  become: true
+  ansible.builtin.apt:
+    name:
+      - build-essential
+      - cmake
+      - curl
+      - direnv
+      - fd-find
+      - fuse
+      - fzf
+      - git
+      - git-delta
+      - htop
+      - hyperfine
+      - perl
+      - podman
+      - podman-docker
+      - python3-pip
+      - python3-venv
+      - ripgrep
+      - socat
+      - stow
+      - tldr
+      - tmux
+      - vivid
+      - wget
+      - xclip
+      - zsh
+      - zsh-autosuggestions
+      - zsh-syntax-highlighting
