@@ -6,7 +6,6 @@
       - build-essential
       - cmake
       - curl
-      - direnv
       - fd-find
       - fuse
       - fzf
@@ -14,6 +13,7 @@
       - git-delta
       - htop
       - hyperfine
+      - libfuse2
       - perl
       - podman
       - podman-docker

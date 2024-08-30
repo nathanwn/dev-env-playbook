@@ -28,6 +28,7 @@
   roles:
     - role: preinstall
     - role: ubuntu_core
+    - role: direnv
     - role: go
     - role: gocloc
     - role: lazygit
@@ -63,7 +64,7 @@
     - name: Install optional packages for guest machine
       ansible.builtin.import_role:
         name: ubuntu_vbox
-      when: ansible_facts["virtualization_role"] == "guest"
+      when: '"WSL" not in ansible_facts["kernel"]'
 
     - name: Install wez
       ansible.builtin.import_role:
