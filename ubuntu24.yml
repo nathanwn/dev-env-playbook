@@ -6,7 +6,6 @@
     - env.yml
   vars:
     integration_testing: false
-    single_tool: ""
   environment: "{{ env }}"
 
   gather_facts: true
@@ -39,19 +38,14 @@
     - role: nerd_fonts
       vars:
         nerd_fonts_fonts:
+          - "ComicShannsMono"
           - "JetBrainsMono"
-      when: ansible_facts["virtualization_role"] == "guest" or integration_testing
-
     - role: delta
-      when: single_tool == "delta" or integration_testing
     - role: hugo
-      when: single_tool == "hugo" or integration_testing
     - role: hyperfine
-      when: single_tool == "hyperfine" or integration_testing
     - role: pandoc
-      when: single_tool == "pandoc" or integration_testing
     - role: vivid
-      when: single_tool == "vivid" or integration_testing
+    - role: nvm
 
   tasks:
     - name: Install optional packages for host machine
@@ -59,7 +53,7 @@
       ansible.builtin.apt:
         name:
           - pandoc
-      when: ansible_facts["virtualization_role"] != "guest"
+      when: '"WSL" not in ansible_facts["kernel"]'
 
     - name: Install optional packages for guest machine
       ansible.builtin.import_role:

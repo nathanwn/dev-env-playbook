@@ -1,0 +1,23 @@
+---
+- name: Download install script
+  ansible.builtin.get_url:
+    url: "https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh"
+    dest: "{{ ansible_env.HOME }}/install/nvm_install.sh"
+    mode: a+x
+
+- name: Run install script
+  ansible.builtin.command:
+    chdir: "{{ ansible_env.HOME }}/install"
+    cmd: bash nvm_install.sh
+  args:
+    creates: "{{ ansible_env.HOME }}/.config/nvm/nvm.sh"
+  environment:
+    XDG_CONFIG_HOME: "{{ ansible_env.HOME }}/.config"
+
+- name: Make nvm available in zsh
+  ansible.builtin.blockinfile:
+    path: "{{ ansible_env.HOME }}/.config/zsh/ansible.zsh"
+    marker: "# {mark} NVM"
+    block: |
+      export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+      [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
