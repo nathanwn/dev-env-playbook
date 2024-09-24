@@ -46,7 +46,7 @@
     - role: pandoc
     - role: vivid
     - role: nvm
-    - role: plan9
+    # - role: plan9
 
   tasks:
     - name: Install optional packages for host machine

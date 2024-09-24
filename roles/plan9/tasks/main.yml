@@ -28,9 +28,15 @@
 
 - name: Download plan9go
   ansible.builtin.git:
+    repo: https://github.com/nathanwn/9fans-go.git
+    dest: "{{ ansible_env.HOME }}/dev/personal/plan9/go"
+  when: integration_testing
+
+- name: Download plan9go
+  ansible.builtin.git:
     repo: git@github.com:nathanwn/9fans-go.git
     dest: "{{ ansible_env.HOME }}/dev/personal/plan9/go"
-    version: f86105fb0728caf743246659b6ada899367a5cf7
+  when: not integration_testing
 
 - name: Download acme utilities by evbogdanov
   ansible.builtin.git:
