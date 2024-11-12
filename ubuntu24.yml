@@ -32,6 +32,8 @@
     - role: gocloc
     - role: lazygit
     - role: nvim
+      tags:
+        - nvim
     - role: python
     - role: sdk
     - role: starship
