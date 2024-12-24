@@ -9,11 +9,11 @@
   ansible.builtin.command:
     chdir: "{{ ansible_env.HOME }}/install"
     cmd: >
-      bash XDG_CONFIG_HOME={{ ansible_env.HOME }}/.config nvm_install.sh
+      bash {{ ansible_env.HOME }}/install/nvm_install.sh
   args:
     creates: "{{ ansible_env.HOME }}/.config/nvm/nvm.sh"
-  # environment:
-  #   XDG_CONFIG_HOME: "{{ ansible_env.HOME }}/.config"
+  environment:
+    XDG_CONFIG_HOME: "{{ ansible_env.HOME }}/.config"
 
 - name: Make nvm available in zsh
   ansible.builtin.blockinfile:

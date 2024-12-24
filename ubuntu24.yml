@@ -28,7 +28,7 @@
     - role: preinstall
     - role: ubuntu_core
     - role: direnv
-    - role: go
+    # - role: go
     - role: gocloc
     - role: lazygit
     - role: nvim
@@ -42,29 +42,53 @@
         nerd_fonts_fonts:
           - "ComicShannsMono"
           - "JetBrainsMono"
+          # - "ComicShannsMono"
+          # - "RobotoMono"
+          # - "Noto"
+          # - "Iosevka"
+      tags:
+        - fonts
     - role: delta
-    - role: hugo
+    # - role: hugo
     - role: hyperfine
-    - role: pandoc
+    # - role: pandoc
     - role: vivid
+    - role: base16
+      vars:
+        base16_themes:
+        - "base16-cupertino"
+        - "base16-emil"
+        - "base16-equilibrium-gray-light"
+        - "base16-gruvbox-light-soft"
+        - "base16-monokai"
+        - "base16-one-light"
+        - "base16-onedark"
+        - "base16-solarized-dark"
+        - "base16-solarized-light"
+        - "base16-tokyo-night-light"
+        # base16_theme: "base16-tokyo-night-light"
+        base16_theme: "base16-equilibrium-gray-light"
+        # base16_theme: "papercolor-light"
+      tags:
+        - base16
     - role: nvm
     # - role: plan9
 
   tasks:
-    - name: Install optional packages for host machine
-      become: true
-      ansible.builtin.apt:
-        name:
-          - pandoc
-      when: '"WSL" not in ansible_facts["kernel"]'
+    # - name: Install optional packages for host machine
+    #   become: true
+    #   ansible.builtin.apt:
+    #     name:
+    #       - pandoc
+    #   when: '"WSL" not in ansible_facts["kernel"]'
 
     - name: Install optional packages for guest machine
       ansible.builtin.import_role:
         name: ubuntu_vbox
       when: '"WSL" not in ansible_facts["kernel"]'
 
-    - name: Install wez
-      ansible.builtin.import_role:
-        name: wez
-      when: >
-        "WSL" not in ansible_facts["kernel"] or integration_testing
+    # - name: Install wez
+    #   ansible.builtin.import_role:
+    #     name: wez
+    #   when: >
+    #     "WSL" not in ansible_facts["kernel"] or integration_testing
