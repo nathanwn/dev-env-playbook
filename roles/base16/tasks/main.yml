@@ -1,0 +1,66 @@
+---
+- name: Create base16 directories
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/{{ item }}"
+    state: directory
+  when: base16_theme is match("base16-.*")
+  loop:
+    - .local/share/base16
+    - .config/vivid/themes
+
+- name: Create xfce4 theme directory
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.local/share/xfce4/terminal/colorschemes"
+    state: directory
+  when: base16_theme is match("base16-.*")
+
+- name: Download xfce4 terminal themes
+  ansible.builtin.git:
+    repo: "https://github.com/tinted-theming/tinted-xfce4-terminal"
+    dest: "{{ ansible_env.HOME }}/.local/share/base16/tinted-xfce4-terminal"
+    version: "6e26308276301c2d2c5aa8786c3d16e85629b96a"
+  when: base16_theme is match("base16-.*")
+
+- name: Install xfce4 terminal themes
+  ansible.builtin.file:
+    src: "{{ ansible_env.HOME }}/.local/share/base16/tinted-xfce4-terminal/colorschemes/{{ item }}.theme"
+    dest: "{{ ansible_env.HOME }}/.local/share/xfce4/terminal/colorschemes/{{ item }}.theme"
+    state: link
+  loop: "{{ base16_themes }}"
+  when: base16_theme is match("base16-.*")
+
+- name: Download vivid themes
+  ansible.builtin.git:
+    repo: "https://github.com/tinted-theming/base16-vivid"
+    dest: "{{ ansible_env.HOME }}/.local/share/base16/base16-vivid"
+    version: "a2193d6b0c7e9357025e9c7ee344b917d7800b03"
+  when: base16_theme is match("base16-.*")
+
+- name: Install vivid themes
+  ansible.builtin.file:
+    src: "{{ ansible_env.HOME }}/.local/share/base16/base16-vivid/themes/{{ item }}.yml"
+    dest: "{{ ansible_env.HOME }}/.config/vivid/themes/{{ item }}.yml"
+    state: link
+  loop: "{{ base16_themes }}"
+  when: base16_theme is match("base16-.*")
+
+- name: Download tmux themes
+  ansible.builtin.git:
+    repo: "https://github.com/tinted-theming/tinted-tmux"
+    dest: "{{ ansible_env.HOME }}/.local/share/base16/tinted-tmux"
+    version: "f0e7f7974a6441033eb0a172a0342e96722b4f14"
+  when: base16_theme is match("base16-.*")
+
+# - name: Install tmux themes
+#   ansible.builtin.copy:
+#     src: "{{ ansible_env.HOME }}/.local/share/base16/tinted-tmux/colors"
+#     dest: "{{ ansible_env.HOME }}/.local/share/tmux/colors"
+#     mode: u=rwx,g=rwx,o=rx
+#     remote_src: true
+
+- name: Activate theme
+  ansible.builtin.blockinfile:
+    path: "{{ ansible_env.HOME }}/.config/zsh/ansible.zsh"
+    marker: "# {mark} THEME"
+    block: |
+      export GLOBAL_THEME="{{ base16_theme }}"
