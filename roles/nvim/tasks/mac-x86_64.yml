@@ -1,0 +1,32 @@
+- name: Create installation directory
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/opt/nvim"
+    state: directory
+    mode: u=rwx,g=rwx,o=rx
+
+- name: Download (Mac x86_64)
+  ansible.builtin.get_url:
+    url: "https://github.com/neovim/neovim/releases/download/{{ nvim.release }}/nvim-macos-x86_64.tar.gz"
+    dest: "{{ ansible_env.HOME }}/opt/nvim/nvim.tar.gz"
+    checksum: "sha256:https://github.com/neovim/neovim/releases/download/{{ nvim.release }}/nvim-macos-x86_64.tar.gz.sha256sum"
+    mode: a+x
+
+- name: Extract
+  ansible.builtin.unarchive:
+    src: "{{ ansible_env.HOME }}/opt/nvim/nvim.tar.gz"
+    dest: "{{ ansible_env.HOME }}/opt/nvim"
+    remote_src: true
+
+- name: Add binary to PATH
+  ansible.builtin.blockinfile:
+    path: "{{ ansible_env.HOME }}/.config/zsh/ansible.zsh"
+    marker: "# {mark} NVIM"
+    block: |
+      export PATH="{{ ansible_env.HOME }}/opt/nvim/nvim-macos-x86_64/bin:$PATH"
+
+- name: Clean up
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - "{{ ansible_env.HOME }}/opt/nvim/nvim.tar.gz"

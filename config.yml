@@ -35,7 +35,7 @@ nerd_fonts:
 nvim_nightly:
   release: "nightly"
 nvim:
-  release: "v0.10.2"
+  release: "v0.10.4"
 pandoc:
   release: "3.3"
 python:
