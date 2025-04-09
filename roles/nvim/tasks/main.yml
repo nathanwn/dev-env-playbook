@@ -3,21 +3,11 @@
   ansible.builtin.get_url:
     url: "https://github.com/neovim/neovim/releases/download/{{ nvim.release }}/nvim-linux-x86_64.appimage"
     dest: "{{ ansible_env.HOME }}/opt/nvim"
-    checksum: "sha256:https://github.com/neovim/neovim/releases/download/{{ nvim.release }}/nvim-linux-x86_64.appimage.sha256sum"
+    checksum: "sha256:{{ nvim.sha256sum_linux }}"
     mode: a+x
   when: >
     ansible_os_family != 'Darwin' and
     ansible_architecture == 'x86_64'
-
-- name: Download (Mac Arm64)
-  ansible.builtin.get_url:
-    url: "https://github.com/neovim/neovim/releases/download/{{ nvim.release }}/nvim-macos-arm64.appimage"
-    dest: "{{ ansible_env.HOME }}/opt/nvim"
-    checksum: "sha256:https://github.com/neovim/neovim/releases/download/{{ nvim.release }}/nvim-macos-arm64.appimage.sha256sum"
-    mode: a+x
-  when: >
-    ansible_os_family == 'Darwin' and
-    ansible_architecture != 'x86_64'
 
 - name: Install nvim (Mac x86_64)
   ansible.builtin.import_tasks: "tasks/mac-x86_64.yml"
