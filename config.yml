@@ -35,8 +35,8 @@ nerd_fonts:
 nvim_nightly:
   release: "nightly"
 nvim:
-  release: "v0.11.0"
-  sha256sum_linux: ca44cd43fe8d55418414496e8ec7bac83f611705ece167f4ccb93cbf46fec6c0
+  release: "v0.11.2"
+  sha256sum_linux: c7c365fdf651f058b2fc153d667b406ac39ca674a54aa9f799544bc8c28dd898
 pandoc:
   release: "3.3"
 python:
