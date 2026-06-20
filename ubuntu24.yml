@@ -53,26 +53,8 @@
     - role: hyperfine
     # - role: pandoc
     - role: vivid
-    - role: base16
-      vars:
-        base16_themes:
-        - "base16-cupertino"
-        - "base16-emil"
-        - "base16-equilibrium-gray-light"
-        - "base16-gruvbox-light-soft"
-        - "base16-monokai"
-        - "base16-one-light"
-        - "base16-onedark"
-        - "base16-solarized-dark"
-        - "base16-solarized-light"
-        - "base16-tokyo-night-light"
-        # base16_theme: "base16-tokyo-night-light"
-        base16_theme: "base16-equilibrium-gray-light"
-        # base16_theme: "papercolor-light"
-      tags:
-        - base16
     - role: nvm
-    # - role: plan9
+      # - role: plan9
 
   tasks:
     # - name: Install optional packages for host machine
@@ -86,9 +68,3 @@
       ansible.builtin.import_role:
         name: ubuntu_vbox
       when: '"WSL" not in ansible_facts["kernel"]'
-
-    # - name: Install wez
-    #   ansible.builtin.import_role:
-    #     name: wez
-    #   when: >
-    #     "WSL" not in ansible_facts["kernel"] or integration_testing

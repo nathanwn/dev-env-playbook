@@ -61,8 +61,6 @@ terraform:
   release: "1.4.6"
 vivid:
   release: "0.9.0"
-wez:
-  release: "20240203-110809-5046fc22"
 zsh:
   plugins:
     zsh_completions:
@@ -71,5 +69,3 @@ zsh:
       release: "v0.7.0"
     zsh_syntax_highlighting:
       release: "0.8.0"
-    powerlevel10k:
-      release: "v1.19.0"

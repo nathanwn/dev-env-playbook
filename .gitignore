@@ -3,3 +3,4 @@
 vars_private.yml
 env.yml
 inventory.ini
+.DS_Store

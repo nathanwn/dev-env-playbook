@@ -6,11 +6,8 @@
     checksum: "sha256:{{ nvim.sha256sum_linux }}"
     mode: a+x
   when: >
-    ansible_os_family != 'Darwin' and
-    ansible_architecture == 'x86_64'
-
+    ansible_os_family != 'Darwin' and ansible_architecture == 'x86_64'
 - name: Install nvim (Mac x86_64)
   ansible.builtin.import_tasks: "tasks/mac-x86_64.yml"
   when: >
-    ansible_os_family == 'Darwin' and
-    ansible_architecture == 'x86_64'
+    ansible_os_family == 'Darwin' and ansible_architecture == 'x86_64'

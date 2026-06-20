@@ -1,3 +1,4 @@
+---
 - name: Create installation directory
   ansible.builtin.file:
     path: "{{ ansible_env.HOME }}/opt/nvim"

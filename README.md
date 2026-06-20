@@ -1,10 +1,19 @@
-# Development Environment Playbook(s)
+# Dev Environment Playbook Collection
 
 ![ci](https://github.com/nathan-wien/dev-env-playbook/actions/workflows/ci.yml/badge.svg)
 
 A collection of Ansible playbooks to setup my personal dev environment.
 
 Inspired by [Jeff Geerling's Mac Development Ansible Playbook](https://github.com/geerlingguy/mac-dev-playbook).
+
+## Simple setup steps
+
+```
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.lock
+ansible-galaxy install -r requirements.yml
+```
 
 ## Setting up a VirtualBox VM
 
@@ -22,3 +31,16 @@ Modify the network settings of the VM:
   * `Guest Port`: `22`
 
 Add the following to `~/.ssh/config` on the host machine:
+
+```ssh-config
+Host my-vm
+  HostName 127.0.0.1
+  User <your-username>
+  Port 43219
+```
+
+Then you can SSH into the VM using the command:
+
+```bash
+$ ssh my-vm
+```
